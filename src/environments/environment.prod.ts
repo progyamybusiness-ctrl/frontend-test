@@ -1,5 +1,5 @@
 export const environment = {
-    production: true,
-    // 🔴 CHANGE THIS to your actual deployed backend URL (e.g., Render, Railway, AWS)
-    apiUrl: 'https://scriencerush-backend-production.onrender.com/api/v1' 
-  };
+  production: true,
+  apiUrl: 'http://3.25.188.72/api/v1', // Your new EC2 Backend
+  socketUrl: 'http://3.25.188.72'      // For real-time gameplay
+};

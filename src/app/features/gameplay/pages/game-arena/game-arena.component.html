@@ -1,0 +1,98 @@
+<div class="duo-wrapper">
+  
+  <header class="game-header">
+    <button class="icon-btn close" (click)="exit()" aria-label="Exit Game">✕</button>
+    
+    <div class="progress-container">
+      <div class="progress-bar-fill" [style.width.%]="progressPercent"></div>
+    </div>
+
+    <div class="streak-counter" [class.on-fire]="streak >= 3">
+      🔥 {{ streak }}
+    </div>
+  </header>
+
+  <main class="game-board">
+    
+    <div class="question-section" @fadeSlide>
+      
+      <div class="mascot-avatar" [attr.data-mood]="mascotState">
+        <img [src]="'assets/images/mascots/' + mascotState + '.svg'" alt="Mascot">
+      </div>
+      
+      <div class="speech-bubble">
+        
+        <div class="q-meta-header" *ngIf="currentQ">
+          <span class="meta-tag year" >
+            📅 {{ currentQ.year || 2022 }}
+          </span>
+          <span class="meta-tag marks" >
+            ⭐ +{{ currentQ.marks || 2 }}
+          </span>
+        </div>
+
+        <div class="q-image-container" *ngIf="currentQ?.image">
+          <img [src]="currentQ.image" alt="Question Diagram" class="q-img">
+        </div>
+
+        <h1 [class.has-image]="currentQ?.image">{{ currentQ?.text }}</h1>
+      
+      </div>
+    </div>
+
+    <div class="options-grid" *ngIf="status === 'PLAYING' || status === 'FEEDBACK'">
+      <button *ngFor="let opt of currentQ?.options; let i = index"
+        class="option-card"
+        [class.selected]="selectedOptionId === opt.id"
+        [class.correct]="status === 'FEEDBACK' && opt.isCorrect"
+        [class.wrong]="status === 'FEEDBACK' && selectedOptionId === opt.id && !opt.isCorrect"
+        [class.dimmed]="status === 'FEEDBACK' && selectedOptionId !== opt.id && !opt.isCorrect"
+        (click)="selectOption(opt.id)"
+        [disabled]="status === 'FEEDBACK'">
+        
+        <span class="opt-key">{{ getOptionLabel(i) }}</span>
+        <span class="opt-text">{{ opt.text }}</span>
+        
+        <img *ngIf="opt.image" [src]="opt.image" class="opt-img-mini">
+      </button>
+    </div>
+
+    <div class="summary-card" *ngIf="status === 'SUMMARY'" @fadeSlide>
+      <h2>Session Complete!</h2>
+      <div style="margin-bottom: 2rem;">
+        <p style="font-size: 1.2rem; opacity: 0.8; margin: 0;">Total XP Earned</p>
+        <p style="font-size: 3.5rem; font-weight: 900; margin: 0; color: #fbbf24;">+{{ sessionScore }}</p>
+      </div>
+      <button class="primary-btn wide" (click)="exit()">Continue Learning</button>
+    </div>
+
+  </main>
+
+  <footer class="feedback-sheet" 
+          [class.visible]="status === 'FEEDBACK'"
+          [class.is-correct]="isCorrect"
+          [class.is-wrong]="!isCorrect">
+    
+    <div class="feedback-content">
+      <div class="icon-circle">
+        {{ isCorrect ? '✓' : '✕' }}
+      </div>
+      <div class="text-group">
+        <h3>{{ isCorrect ? 'Nice job!' : 'Correct Answer:' }}</h3>
+        <div *ngIf="!isCorrect" class="correction-text">
+           <ng-container *ngFor="let opt of currentQ?.options">
+             <span *ngIf="opt.isCorrect" class="correct-answer-pill">{{ opt.text }}</span>
+           </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <button class="continue-btn" 
+            [class.btn-correct]="isCorrect" 
+            [class.btn-wrong]="!isCorrect"
+            (click)="continue()">
+      CONTINUE
+    </button>
+  </footer>
+
+</div>

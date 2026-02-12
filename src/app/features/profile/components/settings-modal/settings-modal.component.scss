@@ -1,0 +1,202 @@
+// =========================================
+// THEME VARIABLES (Localized)
+// =========================================
+:host {
+  --modal-bg: #0f172a;       // Dark Slate/Void
+  --card-bg: #1e293b;        // Panel Background
+  --hover-bg: #334155;       // Hover State
+  --text-primary: #f8fafc;   // White text
+  --text-secondary: #94a3b8; // Muted text
+  --accent-red: #ef4444;     // Logout/Danger
+  --border-color: #334155;   // Subtle borders
+}
+
+// =========================================
+// MODAL OVERLAY
+// =========================================
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8); // Darker dim
+  z-index: 1000;
+  display: flex;
+  align-items: center; // Center on desktop
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-out;
+
+  // Mobile: Align to bottom
+  @media (max-width: 768px) {
+    align-items: flex-end;
+  }
+}
+
+// =========================================
+// SETTINGS CARD
+// =========================================
+.settings-card {
+  background: var(--modal-bg);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 24px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1); // Subtle glowing border
+  color: var(--text-primary);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  @media (max-width: 768px) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 0;
+  }
+}
+
+// =========================================
+// HEADER
+// =========================================
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h3 {
+    margin: 0;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+    // Gradient Text
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .close-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    font-size: 1.5rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+// =========================================
+// MENU LIST
+// =========================================
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 18px 20px;
+  background: var(--card-bg); // Darker panel bg
+  border: 1px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+
+  &:hover {
+    background: var(--hover-bg);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px); // Satisfying nudge
+  }
+
+  .icon {
+    font-size: 1.3rem;
+    margin-right: 16px;
+    opacity: 0.8;
+  }
+
+  .label {
+    flex: 1;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: "Nunito", "Segoe UI", sans-serif;
+    letter-spacing: 0.3px;
+  }
+
+  .arrow {
+    color: var(--text-secondary);
+    font-weight: 800;
+    opacity: 0.5;
+  }
+
+  // LOGOUT VARIANT
+  &.logout {
+    background: rgba(239, 68, 68, 0.08); // Very subtle red tint
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    margin-top: 10px;
+
+    &:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    .label,
+    .icon {
+      color: var(--accent-red);
+    }
+  }
+}
+
+// =========================================
+// FOOTER / VERSION
+// =========================================
+.divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 20px 0;
+  opacity: 0.5;
+}
+
+.version-info {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  opacity: 0.6;
+}
+
+// =========================================
+// ANIMATIONS
+// =========================================
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

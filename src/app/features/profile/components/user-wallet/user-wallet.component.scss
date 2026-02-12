@@ -1,0 +1,142 @@
+/* =========================================
+   THEME VARIABLES (Localized)
+   ========================================= */
+:host {
+  --card-bg: #1e293b;        /* Panel Background */
+  --text-primary: #f8fafc;   /* White text */
+  --text-secondary: #94a3b8; /* Muted text */
+  --accent-blue: #3b82f6;    /* Primary Neon */
+  --accent-green: #10b981;   /* Success Neon */
+  --border-color: #334155;   /* Subtle borders */
+}
+
+/* =========================================
+   CONTAINER
+   ========================================= */
+.wallet-container {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================
+   BALANCE ROW
+   ========================================= */
+.wallet-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.balance-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gem-icon {
+  width: 52px;
+  height: 52px;
+  /* Neon Glow Background */
+  background: rgba(59, 130, 246, 0.15); 
+  color: var(--accent-blue);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.balance-text {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -1px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.balance-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   ACTIONS (Buttons)
+   ========================================= */
+.wallet-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.wallet-ad, .wallet-buy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+/* Watch Ad Button (Green Neon) */
+.wallet-ad {
+  background-color: rgba(16, 185, 129, 0.1); 
+  border-color: rgba(16, 185, 129, 0.2);
+  color: var(--accent-green);
+}
+
+.wallet-ad:hover {
+  background-color: rgba(16, 185, 129, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
+}
+
+/* Buy Bundle Button (Blue Neon) */
+.wallet-buy {
+  background-color: rgba(59, 130, 246, 0.1); 
+  border-color: rgba(59, 130, 246, 0.2);
+  color: var(--accent-blue);
+}
+
+.wallet-buy:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+}
+
+/* Active Press State */
+.wallet-ad:active, .wallet-buy:active {
+  transform: scale(0.96) translateY(0);
+}
+
+.wallet-actions span {
+  font-size: 24px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 5px currentColor); /* Makes emoji glow slightly */
+}
+
+.wallet-actions h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}

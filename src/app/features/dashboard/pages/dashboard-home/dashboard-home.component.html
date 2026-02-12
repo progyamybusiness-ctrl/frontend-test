@@ -1,0 +1,159 @@
+<div class="dashboard-layout">
+
+  <!-- ================= HEADER ================= -->
+  <header
+    class="header glass"
+    *ngIf="insights$ | async as insight"
+    aria-label="User overview"
+  >
+    <div class="header-left">
+      <h1>
+        Hi, <span class="user-name">{{ userName }}</span> 👋
+      </h1>
+
+      <div class="readiness">
+        <span class="value">
+          {{ insight.readiness_score }}%
+        </span>
+
+        <span
+          class="trend"
+          [ngClass]="insight.readiness_trend"
+        >
+          {{ insight.readiness_trend === 'up'
+            ? 'Getting better'
+            : 'Needs attention'
+          }}
+        </span>
+      </div>
+    </div>
+
+    <div class="streak">
+      🔥 {{ insight.streak }} day streak
+    </div>
+  </header>
+
+  <!-- ================= OBJECTIVE ================= -->
+  <section
+    class="objective glass"
+    *ngIf="insights$ | async as insight"
+    aria-labelledby="daily-objective"
+  >
+    <span id="daily-objective">
+      TODAY’S FOCUS
+    </span>
+
+    <h2>
+      {{ insight.daily_objective }}
+    </h2>
+  </section>
+
+  <!-- ================= INSIGHTS ================= -->
+  <section
+    class="insight-strip"
+    *ngIf="insights$ | async as insight"
+    aria-label="Learning insights"
+  >
+
+    <div class="insight glass">
+      <span>READINESS</span>
+      <strong>
+        {{ insight.readiness_score }}% Prepared
+      </strong>
+    </div>
+
+    <div class="insight glass">
+      <span>MEMORY RISK</span>
+      <strong>
+        {{ insight.readiness_trend === 'down'
+          ? 'High – revise today'
+          : 'Stable'
+        }}
+      </strong>
+    </div>
+
+    <div class="insight glass">
+      <span>FOCUS MODE</span>
+      <strong>
+        Adaptive Learning
+      </strong>
+    </div>
+
+  </section>
+
+  <!-- ================= WEAKEST LEVER ================= -->
+  <section
+    class="lever glass"
+    *ngIf="insights$ | async as insight"
+    aria-label="Weakest learning area"
+  >
+    <span>
+      PRIORITY AREA
+    </span>
+
+    <h3>
+      {{ insight.weakest_lever.label }}
+    </h3>
+
+    <p class="lever-hint">
+      Improving this will boost your overall score fastest.
+    </p>
+  </section>
+
+  <!-- ================= SUBJECTS ================= -->
+  <section
+    class="subjects"
+    aria-label="Your subjects"
+  >
+    <h4>
+      YOUR SUBJECTS
+    </h4>
+
+    <ng-container
+      *ngIf="subjects$ | async as subjects; else noSubjects"
+    >
+
+      <div
+        class="subject glass"
+        *ngFor="let subject of subjects"
+        role="button"
+        tabindex="0"
+        (click)="onSelectSubject(subject.id)"
+        (keydown.enter)="onSelectSubject(subject.id)"
+        [attr.aria-label]="'Open subject ' + subject.name"
+      >
+
+        <div class="icon" aria-hidden="true">
+          ◎
+        </div>
+
+        <div class="info">
+          <div class="name">
+            {{ subject.name }}
+          </div>
+
+          <div class="bar" aria-hidden="true">
+            <span
+              [style.width.%]="subject.progress || 0"
+            ></span>
+          </div>
+        </div>
+
+        <div class="percent">
+          {{ subject.progress || 0 }}%
+        </div>
+
+      </div>
+
+    </ng-container>
+
+    <!-- ================= EMPTY STATE ================= -->
+    <ng-template #noSubjects>
+      <p class="empty-state">
+        No subjects yet. Start by adding one 🚀
+      </p>
+    </ng-template>
+
+  </section>
+
+</div>

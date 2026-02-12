@@ -1,0 +1,296 @@
+/* =========================================
+   THEME VARIABLES (Localized)
+   ========================================= */
+   :host {
+    --modal-bg: #0f172a;       /* Dark Slate/Void */
+    --input-bg: #1e293b;       /* Slightly lighter for inputs */
+    --text-primary: #f8fafc;   /* White text */
+    --text-secondary: #94a3b8; /* Muted text */
+    --accent-blue: #3b82f6;    /* Primary Action */
+    --accent-green: #10b981;   /* Success Action */
+    --border-color: #334155;   /* Subtle borders */
+  }
+  
+  /* =========================================
+     MODAL OVERLAY & CONTAINER
+     ========================================= */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Darker dim for focus */
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    backdrop-filter: blur(8px); /* Strong blur for glass effect */
+    -webkit-backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .modal-overlay.closing {
+    animation: fadeOut 0.3s ease-in forwards;
+  }
+  
+  .modal-overlay.closing .modal-container {
+    animation: slideDown 0.3s ease-in forwards;
+  }
+  
+  .modal-container {
+    background: var(--modal-bg);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 24px 24px 0 0;
+    padding: 32px;
+    box-shadow: 
+      0 -10px 40px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1); /* Subtle glowing border */
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    color: var(--text-primary);
+  }
+  
+  @media (min-width: 768px) {
+    .modal-container {
+      align-self: center;
+      border-radius: 24px;
+      margin: 20px;
+    }
+  }
+  
+  /* =========================================
+     HEADER
+     ========================================= */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+  }
+  
+  .modal-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    /* Gradient Text */
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .modal-header .close-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  
+  .modal-header .close-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: rotate(90deg);
+  }
+  
+  /* =========================================
+     AVATAR UPLOAD (Sci-Fi Glow)
+     ========================================= */
+  .image-upload-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 40px;
+  }
+  
+  .image-upload-wrapper .image-preview {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--accent-blue);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); /* Blue Halo */
+    background: var(--input-bg);
+    position: relative;
+  }
+  
+  .image-upload-wrapper .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .image-upload-wrapper .camera-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 50%;
+    transform: translateX(60px); /* Offset from center */
+    background: var(--accent-blue);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--modal-bg); /* Cutout effect */
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  .image-upload-wrapper .camera-btn:hover {
+    transform: translateX(60px) scale(1.1);
+    background: #60a5fa;
+  }
+  
+  .image-upload-wrapper .camera-btn:active {
+    transform: translateX(60px) scale(0.95);
+  }
+  
+  /* =========================================
+     FORM INPUTS (Dark Mode)
+     ========================================= */
+  .form-group {
+    margin-bottom: 30px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .form-group .input-wrapper {
+    position: relative;
+  }
+  
+  .form-group .input-wrapper input {
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--input-bg);
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  
+  .form-group .input-wrapper input:focus {
+    border-color: var(--accent-blue);
+    background: #253045;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  }
+  
+  .form-group .input-wrapper .icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    pointer-events: none;
+    transition: color 0.2s;
+  }
+  
+  .form-group .input-wrapper input:focus + .icon {
+    color: var(--accent-blue);
+  }
+  
+  /* =========================================
+     FOOTER BUTTONS
+     ========================================= */
+  .modal-footer {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  
+  .modal-footer button {
+    flex: 1;
+    padding: 18px;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Ghost Button */
+  .modal-footer button.btn-cancel {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 2px solid var(--border-color);
+    transition: all 0.2s;
+  }
+  
+  .modal-footer button.btn-cancel:hover {
+    border-color: var(--text-secondary);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Solid Primary Button */
+  .modal-footer button.btn-save {
+    background: var(--accent-green);
+    color: #022c22; /* Dark text for contrast */
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    transition: all 0.2s;
+  }
+  
+  .modal-footer button.btn-save:hover {
+    background: #34d399;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .modal-footer button.btn-save:active {
+    transform: translateY(0);
+  }
+  
+  .modal-footer button.btn-save:disabled {
+    background: var(--border-color);
+    color: var(--text-secondary);
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* =========================================
+     ANIMATIONS
+     ========================================= */
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  
+  @keyframes slideDown {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }

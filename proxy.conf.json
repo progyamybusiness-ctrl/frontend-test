@@ -1,0 +1,11 @@
+
+
+{
+  "/api": {
+    "target": "http://3.25.188.72",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "cookieDomainRewrite": "localhost"
+  }
+}

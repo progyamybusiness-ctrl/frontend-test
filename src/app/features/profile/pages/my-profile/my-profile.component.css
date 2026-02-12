@@ -1,0 +1,117 @@
+/* =========================================
+   THEME VARIABLES (Synced with AI Hub)
+   ========================================= */
+:host {
+  /* Core Colors */
+  --app-bg: #05070a;       /* Deep Void */
+  --card-bg: #0d111a;      /* Panel Background */
+  --border-color: #1a1f2b; /* Subtle Borders */
+  
+  /* Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  
+  /* Accents */
+  --accent-blue: #3b82f6;
+  --accent-glow: rgba(59, 130, 246, 0.5);
+}
+
+/* =========================================
+   GLOBAL LAYOUT & BACKGROUND
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
+
+.main-container {
+  min-height: 100vh;
+  width: 100%; /* Ensure full width on all devices */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Better scrolling behavior */
+  
+  background-color: var(--app-bg);
+  /* Responsive Gradient: Scales with viewport */
+  background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+  background-attachment: fixed; /* Parallax feel */
+  
+  padding: 0; /* Mobile default: Reset padding */
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* =========================================
+   RESPONSIVE PROFILE CONTAINER
+   ========================================= */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* --- MOBILE DEVICES (Default) --- */
+.main-container {
+  padding: 16px 12px; /* Small outer padding for mobile */
+}
+
+.profile-container {
+  width: 100%;
+  max-width: 100%; /* Take full width */
+}
+
+/* --- TABLETS (iPad, Foldables) --- */
+@media (min-width: 768px) {
+  .main-container {
+    padding: 32px 24px; /* More breathing room */
+  }
+
+  .profile-container {
+    max-width: 650px; /* Constrain width for readability */
+    gap: 32px; /* Increase gap between cards */
+  }
+}
+
+/* --- DESKTOP (Laptops, Monitors) --- */
+@media (min-width: 1024px) {
+  .main-container {
+    padding-top: 48px;
+  }
+
+  .profile-container {
+    /* Widen container so child components (like Stats Grid) can expand to 4 columns */
+    max-width: 900px; 
+    gap: 40px;
+  }
+}
+
+/* --- LARGE SCREENS (Ultra-wide) --- */
+@media (min-width: 1440px) {
+  .profile-container {
+    max-width: 1000px;
+  }
+}
+
+/* =========================================
+   COMPONENT ANIMATIONS (Entry Effects)
+   ========================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-container > * {
+  animation: fadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0; /* Start hidden */
+}
+
+/* Stagger animations for child elements (Header, Wallet, Stats, etc.) */
+.profile-container > *:nth-child(1) { animation-delay: 0.1s; }
+.profile-container > *:nth-child(2) { animation-delay: 0.2s; }
+.profile-container > *:nth-child(3) { animation-delay: 0.3s; }
+.profile-container > *:nth-child(4) { animation-delay: 0.4s; }
+.profile-container > *:nth-child(5) { animation-delay: 0.5s; }

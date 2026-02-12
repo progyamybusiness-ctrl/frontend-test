@@ -1,0 +1,487 @@
+// @import '../../../../../styles/variables';
+
+// .modal-overlay {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0, 0, 0, 0.6); // Dark dimming
+//   z-index: 2000;
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-end; // Align to bottom for mobile
+//   backdrop-filter: blur(4px); // Professional blur effect
+//   animation: fadeIn 0.3s ease-out;
+
+//   &.closing {
+//     animation: fadeOut 0.3s ease-in forwards;
+//     .modal-container {
+//       animation: slideDown 0.3s ease-in forwards;
+//     }
+//   }
+// }
+
+// .modal-container {
+//   background: $bg-color; // Use app background (e.g., white or light grey)
+//   width: 100%;
+//   max-width: 500px; // Desktop constraint
+//   border-radius: 24px 24px 0 0; // Top corners rounded
+//   padding: 24px;
+//   box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+//   animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+//   position: relative;
+  
+//   // Desktop Tweak: Center it instead of bottom sheet
+//   @media (min-width: 768px) {
+//     align-self: center;
+//     border-radius: 24px;
+//     margin: 20px;
+//   }
+// }
+
+// .modal-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-bottom: 30px;
+
+//   h3 {
+//     margin: 0;
+//     font-size: 1.4rem;
+//     color: $text-color;
+//   }
+
+//   .close-btn {
+//     background: none;
+//     border: none;
+//     font-size: 2rem;
+//     color: $grey-text;
+//     cursor: pointer;
+//     line-height: 1;
+//   }
+// }
+
+// .image-upload-wrapper {
+//   display: flex;
+//   justify-content: center;
+//   position: relative;
+//   margin-bottom: 30px;
+
+//   .image-preview {
+//     width: 120px;
+//     height: 120px;
+//     border-radius: 50%;
+//     overflow: hidden;
+//     border: 4px solid white;
+//     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+//     background: $grey-light;
+    
+//     img {
+//       width: 100%;
+//       height: 100%;
+//       object-fit: cover;
+//     }
+//   }
+
+//   .camera-btn {
+//     position: absolute;
+//     bottom: 0;
+//     right: 35%; // Adjust based on circle size
+//     transform: translateX(20px);
+//     background: $primary-blue;
+//     color: white;
+//     width: 36px;
+//     height: 36px;
+//     border-radius: 50%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     cursor: pointer;
+//     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+//     transition: transform 0.2s;
+
+//     &:active {
+//       transform: translateX(20px) scale(0.9);
+//     }
+//   }
+// }
+
+// .form-group {
+//   margin-bottom: 30px;
+
+//   label {
+//     display: block;
+//     font-size: 0.9rem;
+//     color: $grey-text;
+//     margin-bottom: 8px;
+//     font-weight: 600;
+//   }
+
+//   .input-wrapper {
+//     position: relative;
+    
+//     input {
+//       width: 100%;
+//       padding: 16px;
+//       border: 2px solid $grey-border;
+//       border-radius: 16px;
+//       font-size: 1.1rem;
+//       font-weight: 700;
+//       color: $text-color;
+//       background: $grey-light;
+//       outline: none;
+//       transition: border-color 0.2s;
+
+//       &:focus {
+//         border-color: $primary-blue;
+//         background: white;
+//       }
+//     }
+
+//     .icon {
+//       position: absolute;
+//       right: 16px;
+//       top: 50%;
+//       transform: translateY(-50%);
+//       color: $grey-text;
+//       pointer-events: none;
+//     }
+//   }
+// }
+
+// .modal-footer {
+//   display: flex;
+//   gap: 16px;
+
+//   button {
+//     flex: 1;
+//     padding: 16px;
+//     border-radius: 16px;
+//     font-weight: 700;
+//     font-size: 1rem;
+//     cursor: pointer;
+//     border: none;
+    
+//     &.btn-cancel {
+//       background: $grey-light;
+//       color: $text-color;
+//     }
+
+//     &.btn-save {
+//       background: $primary-green; // Uses your brand green
+//       color: white;
+//       box-shadow: 0 4px 0 $primary-green-dark;
+//       transition: transform 0.1s, box-shadow 0.1s;
+
+//       &:active {
+//         transform: translateY(4px);
+//         box-shadow: none;
+//       }
+
+//       &:disabled {
+//         background: $grey-border;
+//         box-shadow: none;
+//         cursor: not-allowed;
+//       }
+//     }
+//   }
+// }
+
+// // Animations
+// @keyframes slideUp {
+//   from { transform: translateY(100%); }
+//   to { transform: translateY(0); }
+// }
+
+// @keyframes slideDown {
+//   from { transform: translateY(0); }
+//   to { transform: translateY(100%); }
+// }
+
+// @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+// @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+
+
+
+// =========================================
+// THEME VARIABLES (Localized for this component)
+// =========================================
+:host {
+  --modal-bg: #0f172a;       // Dark Slate/Void
+  --input-bg: #1e293b;       // Slightly lighter for inputs
+  --text-primary: #f8fafc;   // White text
+  --text-secondary: #94a3b8; // Muted text
+  --accent-blue: #3b82f6;    // Primary Action
+  --accent-green: #10b981;   // Success Action
+  --border-color: #334155;   // Subtle borders
+}
+
+// =========================================
+// MODAL OVERLAY & CONTAINER
+// =========================================
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); // Darker dim for focus
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; // Align to bottom for mobile
+  backdrop-filter: blur(8px); // Strong glass effect
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-out;
+
+  &.closing {
+    animation: fadeOut 0.3s ease-in forwards;
+    .modal-container {
+      animation: slideDown 0.3s ease-in forwards;
+    }
+  }
+}
+
+.modal-container {
+  background: var(--modal-bg);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 24px 24px 0 0;
+  padding: 32px;
+  box-shadow: 
+    0 -10px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1); // Subtle glowing border
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  color: var(--text-primary);
+
+  // Desktop Tweak: Center it
+  @media (min-width: 768px) {
+    align-self: center;
+    border-radius: 24px;
+    margin: 20px;
+  }
+}
+
+// =========================================
+// HEADER
+// =========================================
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    // Gradient Text
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .close-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+// =========================================
+// AVATAR UPLOAD (Sci-Fi Glow)
+// =========================================
+.image-upload-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 40px;
+
+  .image-preview {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--accent-blue);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); // Blue Halo
+    background: var(--input-bg);
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .camera-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 50%;
+    transform: translateX(60px); // Offset
+    background: var(--accent-blue);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--modal-bg); // Cutout effect
+    transition: transform 0.2s, background-color 0.2s;
+
+    &:hover {
+      transform: translateX(60px) scale(1.1);
+      background: #60a5fa;
+    }
+
+    &:active {
+      transform: translateX(60px) scale(0.95);
+    }
+  }
+}
+
+// =========================================
+// FORM INPUTS
+// =========================================
+.form-group {
+  margin-bottom: 30px;
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .input-wrapper {
+    position: relative;
+
+    input {
+      width: 100%;
+      padding: 18px 20px;
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--input-bg);
+      outline: none;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: var(--accent-blue);
+        background: #253045; // Subtle highlight bg
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+
+        // Highlight icon when focused
+        + .icon {
+          color: var(--accent-blue);
+        }
+      }
+    }
+
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+  }
+}
+
+// =========================================
+// FOOTER BUTTONS
+// =========================================
+.modal-footer {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+
+  button {
+    flex: 1;
+    padding: 18px;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    // Ghost Button (Cancel)
+    &.btn-cancel {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 2px solid var(--border-color);
+      transition: all 0.2s;
+
+      &:hover {
+        border-color: var(--text-secondary);
+        color: #fff;
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    // Solid Primary Button (Save)
+    &.btn-save {
+      background: var(--accent-green);
+      color: #022c22; // Dark text for legibility
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s;
+
+      &:hover {
+        background: #34d399;
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      &:disabled {
+        background: var(--border-color);
+        color: var(--text-secondary);
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+  }
+}
+
+// =========================================
+// ANIMATIONS
+// =========================================
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes slideDown { from { transform: translateY(0); } to { transform: translateY(100%); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }

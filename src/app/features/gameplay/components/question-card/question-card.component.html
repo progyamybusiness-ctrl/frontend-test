@@ -1,0 +1,16 @@
+<div class="question-container anim-slide-up">
+  <h2 class="question-text">{{ question.text }}</h2>
+  
+  <div class="options-grid">
+    <div 
+      class="option-card" 
+      *ngFor="let opt of question.options; let i = index"
+      [class.selected]="selectedOptionId === opt.id"
+      [class.disabled]="disabled"
+      (click)="selectOption(opt.id)">
+      
+      <span class="option-prefix">{{ i + 1 }}</span>
+      <span class="option-text">{{ opt.text }}</span>
+    </div>
+  </div>
+</div>

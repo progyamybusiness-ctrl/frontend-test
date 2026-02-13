@@ -162,7 +162,7 @@ export class AiTutorComponent implements OnInit {
   startTask(task: DailyTask) {
     if (task.status !== 'locked') {
       const queryParams: any = { mode: task.type };
-      
+      let routeId = 'practice';
       // Handle Mistake Review (List of IDs)
       if (task.questionIds && task.questionIds.length > 0) {
         queryParams.questionIds = task.questionIds.join(',');
@@ -170,9 +170,13 @@ export class AiTutorComponent implements OnInit {
       // Handle Standard Topic
       else if (task.topicId) {
         queryParams.topicId = task.topicId;
+        routeId = task.topicId; // ✅ Use the actual Topic ID for the route
       }
 
-      this.router.navigate(['/game/play'], { queryParams });
+      console.log("yo "+ task.topicId)
+      const id__ = task.topicId
+
+      this.router.navigate(['/gameplay', routeId], { queryParams: queryParams });
     }
   }
 

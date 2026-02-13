@@ -2,7 +2,7 @@
 
 {
   "/api": {
-    "target": "http://3.25.188.72",
+    "target": "http://3.25.181.105/",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",

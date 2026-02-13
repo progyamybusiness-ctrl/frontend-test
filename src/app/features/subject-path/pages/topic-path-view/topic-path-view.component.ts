@@ -104,7 +104,7 @@ export class TopicPathViewComponent implements OnInit {
   }
 
   onTopicClick(topicId: string) {
-    this.router.navigate(['/game', topicId]);
+    this.router.navigate(['/gameplay', topicId]);
   }
 
   goBack() {

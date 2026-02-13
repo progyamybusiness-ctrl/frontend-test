@@ -1,28 +1,30 @@
-import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { Injectable } from '@angular/core';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+  HttpErrorResponse
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { catchError, throwError } from 'rxjs';
 
-export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const authService = inject(AuthService);
-  const router = inject(Router);
+@Injectable()
+export class ErrorInterceptor implements HttpInterceptor {
 
-  return next(req).pipe(
-    catchError((error: HttpErrorResponse) => {
-      // ✅ Debug Log: Check console to see if this prints!
-      console.log('Interceptor caught error:', error.status); 
+  constructor(private router: Router) {}
 
-      // If session is dead (401) or forbidden (403), force logout
-      if (error.status === 401 || error.status === 403) {
-        // Prevent infinite loop on login page
-        if (!req.url.includes('/auth/login')) {
-          console.warn('Session expired. Redirecting to login...');
-          authService.logout();
-          router.navigate(['/auth/login']);
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          // Auto logout if 401 response returned from api
+          localStorage.removeItem('science_rush_user');
+          this.router.navigate(['/auth/login']);
         }
-      }
-      return throwError(() => error);
-    })
-  );
-};
+        return throwError(() => error);
+      })
+    );
+  }
+}
